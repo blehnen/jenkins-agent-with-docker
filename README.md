@@ -3,8 +3,8 @@
 Jenkins inbound agent (JDK 21) with the Docker CLI baked in.
 
 Companion image to
-[`jenkins-with-docker`](https://github.com/blehnen/jenkins-with-docker) —
-that one is the **controller**, this one is the **build agent**.
+[`jenkins-with-docker`](https://github.com/blehnen/jenkins-with-docker).
+That one is the **controller**; this one is the **build agent**.
 
 ## Why a docker-enabled agent
 
@@ -12,15 +12,15 @@ When a Jenkinsfile uses
 ```groovy
 agent { docker { image 'mcr.microsoft.com/dotnet/sdk:10.0' } }
 ```
-the `docker pull` and `docker run` commands execute on whatever Jenkins
-node the stage runs on — **not** on the controller. If your cloud agent
+the `docker pull` and `docker run` commands run on whatever Jenkins
+node picks up the stage, **not** on the controller. If your cloud-agent
 template uses an image without a docker client (the default
-`jenkins/inbound-agent`), builds fail with `docker: not found` even when
-the controller has docker installed.
+`jenkins/inbound-agent` doesn't have one), builds fail with
+`docker: not found` even when the controller has docker installed.
 
 This image is `jenkins/inbound-agent:jdk21` plus `docker-ce-cli`. It
-talks to the host's docker daemon via a mounted socket — Docker-out-of-
-Docker pattern, same as the controller.
+talks to the host's docker daemon over a mounted socket
+(Docker-out-of-Docker pattern, same as the controller).
 
 ## Image
 
@@ -44,9 +44,10 @@ In the cloud template:
 | Extra group GIDs | host's docker socket GID (commonly `281` on Unraid) |
 | User | leave blank or `jenkins` (controller-spawned, not Unraid-overridden) |
 
-If the agent runs under an Unraid uid override (uid 99 / nobody), that's
-fine — the supplementary group from "Extra group GIDs" works regardless
-of the run-as user, the same way `--group-add` works on the controller.
+If the agent runs under an Unraid uid override (uid 99 / nobody),
+that's fine. The supplementary group from "Extra group GIDs" works
+regardless of the run-as user, the same way `--group-add` does on the
+controller.
 
 Find the host's docker-socket GID with:
 
@@ -65,9 +66,9 @@ container.
 ## Build cadence
 
 The publish workflow runs:
-- on every push to `main` (rebuilds with current upstream inbound-agent),
-- weekly on Monday 06:00 UTC (catches upstream / CVE patches),
-- on `v*` tags (semver pinning for consumers who want stability).
+- on every push to `main` (rebuilds with the current upstream inbound-agent),
+- weekly on Monday 06:00 UTC (picks up upstream + CVE patches),
+- on `v*` tags (a stable pin for anyone who doesn't want auto-updates).
 
 ## Updating the base
 
