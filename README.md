@@ -1,5 +1,11 @@
 # jenkins-agent-with-docker
 
+[![Build and publish](https://github.com/blehnen/jenkins-agent-with-docker/actions/workflows/publish.yml/badge.svg)](https://github.com/blehnen/jenkins-agent-with-docker/actions/workflows/publish.yml)
+[![Docker image version](https://img.shields.io/docker/v/blehnen74/jenkins-agent-with-docker?sort=semver&logo=docker&logoColor=white)](https://hub.docker.com/r/blehnen74/jenkins-agent-with-docker)
+[![Docker pulls](https://img.shields.io/docker/pulls/blehnen74/jenkins-agent-with-docker)](https://hub.docker.com/r/blehnen74/jenkins-agent-with-docker)
+[![Image size](https://img.shields.io/docker/image-size/blehnen74/jenkins-agent-with-docker?sort=semver)](https://hub.docker.com/r/blehnen74/jenkins-agent-with-docker/tags)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Jenkins inbound agent (JDK 21) with the Docker CLI baked in.
 
 Companion image to
