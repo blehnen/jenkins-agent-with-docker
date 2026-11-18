@@ -6,7 +6,7 @@
 [![Image size](https://img.shields.io/docker/image-size/blehnen74/jenkins-agent-with-docker?sort=semver)](https://hub.docker.com/r/blehnen74/jenkins-agent-with-docker/tags)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Jenkins inbound agent (JDK 21) with the Docker CLI baked in.
+Jenkins inbound agent (JDK 25) with the Docker CLI baked in.
 
 Companion image to
 [`jenkins-with-docker`](https://github.com/blehnen/jenkins-with-docker).
@@ -24,14 +24,14 @@ template uses an image without a docker client (the default
 `jenkins/inbound-agent` doesn't have one), builds fail with
 `docker: not found` even when the controller has docker installed.
 
-This image is `jenkins/inbound-agent:jdk21` plus `docker-ce-cli`. It
+This image is `jenkins/inbound-agent:jdk25` plus `docker-ce-cli`. It
 talks to the host's docker daemon over a mounted socket
 (Docker-out-of-Docker pattern, same as the controller).
 
 ## Image
 
 ```
-blehnen74/jenkins-agent-with-docker:weekly             # tracks main, JDK 21
+blehnen74/jenkins-agent-with-docker:weekly             # tracks main, JDK 25
 blehnen74/jenkins-agent-with-docker:latest             # alias for :weekly
 blehnen74/jenkins-agent-with-docker:weekly-YYYYMMDD    # weekly rebuild snapshot
 blehnen74/jenkins-agent-with-docker:vX.Y.Z             # tagged release
@@ -78,6 +78,6 @@ The publish workflow runs:
 
 ## Updating the base
 
-`Dockerfile` is pinned to `jenkins/inbound-agent:jdk21`. To change JDK
+`Dockerfile` is pinned to `jenkins/inbound-agent:jdk25`. To change JDK
 or pin a specific upstream tag, edit the `FROM` line and push to `main`.
 Tag a `v*` release if you want a stable pin published.

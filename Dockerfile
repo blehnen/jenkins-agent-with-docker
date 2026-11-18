@@ -1,6 +1,6 @@
 # jenkins-agent-with-docker
 #
-# Jenkins inbound agent (JDK 21) + Docker CLI baked in. Companion to
+# Jenkins inbound agent (JDK 25) + Docker CLI baked in. Companion to
 # blehnen74/jenkins-with-docker — that image is the controller, this is
 # the build agent.
 #
@@ -22,7 +22,7 @@
 #   - Container settings → Mounts: add `/var/run/docker.sock` host-to-container
 #   - Container settings → Extra group GIDs: add the host's docker.sock GID
 
-FROM jenkins/inbound-agent:jdk21
+FROM jenkins/inbound-agent:jdk25
 
 USER root
 
